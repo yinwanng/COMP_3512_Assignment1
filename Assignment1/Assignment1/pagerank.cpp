@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Matrix.h"
 using namespace std;
 
 int main()
@@ -22,6 +23,10 @@ int main()
 		cout << line << endl;
 	}
 
+
+	Matrix m{ 4 };
+
+	cout << m << endl;
 
 	system("pause");
 	return 0;
