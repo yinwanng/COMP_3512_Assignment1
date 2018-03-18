@@ -125,6 +125,16 @@ Matrix& Matrix::set_importance()
 	return *this;
 }
 
+Matrix & Matrix::set_randomness()
+{
+	for (int row = 0; row < dimensions; row++) {
+		for (int col = 0; col < dimensions; col++) {
+			matrix[row * dimensions + col] = matrix[row * dimensions + col] * 0.85;
+		}
+	}
+	return *this;
+}
+
 // Prefix: Increments all the values in the Matrix by 1.
 Matrix & Matrix::operator++()
 {
@@ -168,8 +178,8 @@ ostream & operator<<(ostream & out, const Matrix & m)
 {
 	for (int row = 0; row < m.dimensions; row++) {
 		for (int col = 0; col < m.dimensions; col++) {
-			//out << setw(4) << m.get_value(row, col);
-			out << m.get_value(row, col) << " ";
+			out << setw(8) << m.get_value(row, col);
+			//out << m.get_value(row, col) << " ";
 			if (col % m.dimensions == m.dimensions - 1)
 			{
 				out << "\n";
@@ -279,12 +289,16 @@ Matrix & Matrix::operator=(Matrix other)
 // POST: rhs matrix values been added to this
 Matrix & Matrix::operator+=(const Matrix &rhs)
 {
-	for (int row = 0; row < rhs.dimensions; row++) {
-		for (int col = 0; col < rhs.dimensions; col++) {
-			this->matrix[row * this->dimensions + col] = this->matrix[row * this->dimensions + col] + matrix[row * rhs.dimensions + col];
+	
+	for (int row = 0; row < dimensions; row++) {
+		for (int col = 0; col < dimensions; col++) {
+			matrix[row * dimensions + col] = matrix[row * dimensions + col] + rhs.matrix[row * dimensions + col];
 		}
 	}
 	return *this;
+
+	
+
 }
 
 // Substracts the matrix values
@@ -294,7 +308,7 @@ Matrix & Matrix::operator-=(const Matrix &rhs)
 {
 	for (int row = 0; row < rhs.dimensions; row++) {
 		for (int col = 0; col < rhs.dimensions; col++) {
-			this->matrix[row * this->dimensions + col] = this->matrix[row * this->dimensions + col] - matrix[row * rhs.dimensions + col];
+			matrix[row * dimensions + col] = matrix[row * dimensions + col] - rhs.matrix[row * dimensions + col];
 		}
 	}
 	return *this;

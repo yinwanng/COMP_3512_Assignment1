@@ -16,6 +16,7 @@ public:
 	double get_value(int, int) const;
 	void clear() const;
 	Matrix& set_importance();
+	Matrix& set_randomness();
 
 	// insertion operator
 	friend ostream & operator<<(ostream &, const Matrix &);

@@ -10,7 +10,6 @@ int main()
 	size_t inputStringLength = 0;
 	int dimension = 0;
 	vector<double> connectivityValues;
-	double p{ 0.85 };
 
 	string filename = "connectivity.txt";
 	ifstream input;
@@ -60,10 +59,29 @@ int main()
 	cout << cMatrix << endl;
 
 	Matrix sMatrix = cMatrix;
+	// set importance
 	sMatrix.set_importance();
-	
 
+
+	sMatrix.set_randomness();
+	
 	cout << sMatrix << endl;
+
+
+	Matrix qMatrix{ dimension };
+
+	for (int row = 0; row < dimension; row++) {
+		for (int col = 0; col < dimension; col++) {
+			qMatrix.set_value(row, col, (1.0 / dimension) * 0.15);
+		}
+	}
+
+	cout << qMatrix << endl;
+	
+	// created transition matrix
+	Matrix mMatrix = sMatrix + qMatrix;
+
+	cout << mMatrix << endl;
 
 
 	system("pause");
