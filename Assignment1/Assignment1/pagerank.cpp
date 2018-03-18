@@ -117,6 +117,7 @@ int main()
 		for (int i = 0; i < dimension; i++) {
 			outFile << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << matrixRank[i] / dimension << endl;
 		}
+		outFile.close();
 	}
 	else {
 		cout << "Could not create file: " << outputFileName << endl;
