@@ -9,6 +9,7 @@ public:
 	~Matrix();
 	Matrix(const Matrix &);
 	Matrix(int);
+	Matrix(int, double);
 	Matrix(double[], int);
 
 	// setters and getters

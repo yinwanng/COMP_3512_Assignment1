@@ -48,6 +48,17 @@ Matrix::Matrix(int n)
 	}
 }
 
+Matrix::Matrix(int n, double s)
+{
+	dimensions = n;
+	matrix = new double[n * n];
+	for (int row = 0; row < dimensions; row++) {
+		for (int col = 0; col < dimensions; col++) {
+			matrix[row * dimensions + col] = s;
+		}
+	}
+}
+
 // Constructor that creates an n x n Matrix that contains values from
 // the array
 // PRE: The size of the array must have an integer square root.
@@ -178,7 +189,7 @@ ostream & operator<<(ostream & out, const Matrix & m)
 {
 	for (int row = 0; row < m.dimensions; row++) {
 		for (int col = 0; col < m.dimensions; col++) {
-			out << setw(8) << m.get_value(row, col);
+			out << setw(15) << m.get_value(row, col);
 			//out << m.get_value(row, col) << " ";
 			if (col % m.dimensions == m.dimensions - 1)
 			{
@@ -296,9 +307,6 @@ Matrix & Matrix::operator+=(const Matrix &rhs)
 		}
 	}
 	return *this;
-
-	
-
 }
 
 // Substracts the matrix values

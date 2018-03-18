@@ -3,10 +3,12 @@
 #include <string>
 #include <Math.h>
 #include <vector>
+#include <iomanip>
 #include "Matrix.h"
 using namespace std;
 int main()
 {
+	
 	size_t inputStringLength = 0;
 	int dimension = 0;
 	vector<double> connectivityValues;
@@ -19,6 +21,7 @@ int main()
 		return 1;
 	}
 
+	cout << "Input file contents: \n";
 	// count to find Matrix diemsnion
 	while (input) {
 		string line;	
@@ -32,7 +35,7 @@ int main()
 
 	dimension = sqrt((inputStringLength + 1) / 2);
 
-	cout << "dimension count: " << dimension << endl;
+	cout << "Dimension count: " << dimension << endl;
 
 	// constructed  connectivity matrix
 	Matrix cMatrix{ dimension };
@@ -44,7 +47,6 @@ int main()
 		connectivityValues.push_back(value);
 	}
 	input.close();
-
 
 	// assign the values to the connectivity matrix
 	int i = 0;
@@ -61,27 +63,46 @@ int main()
 	Matrix sMatrix = cMatrix;
 	// set importance
 	sMatrix.set_importance();
+	cout << "S Matrix after importance\n" << sMatrix << endl;
 
-
+	// set randomness
 	sMatrix.set_randomness();
+	cout << "S Matrix after randomness\n" << sMatrix << endl;
 	
-	cout << sMatrix << endl;
-
-
-	Matrix qMatrix{ dimension };
-
-	for (int row = 0; row < dimension; row++) {
-		for (int col = 0; col < dimension; col++) {
-			qMatrix.set_value(row, col, (1.0 / dimension) * 0.15);
-		}
-	}
-
-	cout << qMatrix << endl;
+	// set up q matrix
+	Matrix qMatrix{ dimension, (1.0 / dimension) * 0.15 };
+	
+	// print q matrix
+	cout << "Q Matrix after *0.15\n" << qMatrix << endl;
 	
 	// created transition matrix
 	Matrix mMatrix = sMatrix + qMatrix;
 
-	cout << mMatrix << endl;
+	// print transition matrix
+	cout << "Transition Matrix\n" << mMatrix << endl;
+
+	// create column matrix rank
+	double *matrixRank = new double[dimension];
+	for (int i = 0; i < dimension; i++) {
+		matrixRank[i] = 1;
+	}
+
+	// markov process
+	int index = 0;
+	double rank = 0;
+	for (int row = 0; row < dimension; row++) {
+		for (int col = 0; col < dimension; col++) {
+			rank+= mMatrix.get_value(row, col) * matrixRank[index];
+		}
+
+		matrixRank[index++] = rank;
+		rank = 0;
+	} 
+
+	for (int i = 0; i < dimension; i++) {
+		cout << fixed << setprecision(3) << matrixRank[i]/dimension << endl;
+		cout << fixed << setprecision(4) << matrixRank[i] << endl;
+	}
 
 
 	system("pause");

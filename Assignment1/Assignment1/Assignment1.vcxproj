@@ -120,6 +120,15 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="connectivity.txt" />
+    <Text Include="connectivity1.txt" />
+    <Text Include="connectivity2.txt" />
+    <Text Include="connectivity3.txt" />
+    <Text Include="connectivity4.txt" />
+    <Text Include="connectivity5.txt" />
+    <Text Include="connectivity6.txt" />
+    <Text Include="connectivity7.txt" />
+    <Text Include="connectivity8.txt" />
+    <Text Include="connectivity9.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrix.h" />
