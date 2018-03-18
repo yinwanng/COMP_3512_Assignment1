@@ -5,7 +5,10 @@
 #include <vector>
 #include <iomanip>
 #include "Matrix.h"
+
+#define ASCII_OFFSET      65   
 using namespace std;
+
 int main()
 {
 	
@@ -99,11 +102,25 @@ int main()
 		rank = 0;
 	} 
 
+	// display check
+	cout << "Rank\n";
 	for (int i = 0; i < dimension; i++) {
-		cout << fixed << setprecision(3) << matrixRank[i]/dimension << endl;
-		cout << fixed << setprecision(4) << matrixRank[i] << endl;
+		cout << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << matrixRank[i] / dimension << endl;
 	}
 
+
+	// write to file
+	ofstream outFile;
+	string outputFileName = "Rank.txt";
+	outFile.open(outputFileName);
+	if (outFile.is_open()) {
+		for (int i = 0; i < dimension; i++) {
+			outFile << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << matrixRank[i] / dimension << endl;
+		}
+	}
+	else {
+		cout << "Could not create file: " << outputFileName << endl;
+	}
 
 	system("pause");
 	return 0;
