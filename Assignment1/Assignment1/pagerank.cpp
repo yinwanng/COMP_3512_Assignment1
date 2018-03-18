@@ -5,12 +5,12 @@
 #include <vector>
 #include "Matrix.h"
 using namespace std;
-
 int main()
 {
-	int inputStringLength = 0;
+	size_t inputStringLength = 0;
 	int dimension = 0;
 	vector<double> connectivityValues;
+	double p{ 0.85 };
 
 	string filename = "connectivity.txt";
 	ifstream input;
@@ -52,19 +52,18 @@ int main()
 	for (int row = 0; row < dimension; row++) {
 		for (int col = 0; col < dimension; col++) {
 			cMatrix.set_value(row, col, connectivityValues[i++]);
-
 		}
 	}
 
-
+	// print connectivity matrix
+	cout << "\nConnectivity Matrix" << endl;
 	cout << cMatrix << endl;
 
+	Matrix sMatrix = cMatrix;
+	sMatrix.set_importance();
+	
 
-
-
-
-
-
+	cout << sMatrix << endl;
 
 
 	system("pause");

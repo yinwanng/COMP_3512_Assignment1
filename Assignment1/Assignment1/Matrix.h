@@ -9,12 +9,13 @@ public:
 	~Matrix();
 	Matrix(const Matrix &);
 	Matrix(int);
-	Matrix(int[], int);
+	Matrix(double[], int);
 
 	// setters and getters
-	void set_value(int, int, int);
-	int get_value(int, int) const;
+	void set_value(int, int, double);
+	double get_value(int, int) const;
 	void clear() const;
+	Matrix& set_importance();
 
 	// insertion operator
 	friend ostream & operator<<(ostream &, const Matrix &);
@@ -46,6 +47,6 @@ public:
 	// identity
 	Matrix& identity();
 private:
-	int *matrix;
+	double *matrix;
 	int dimensions;
 };
