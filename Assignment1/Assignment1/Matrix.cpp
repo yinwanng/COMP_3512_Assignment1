@@ -357,3 +357,21 @@ Matrix & Matrix::identity()
 	return *this;
 }
 
+double * Matrix::multiplyMatrix(double *r)
+{
+	double *temp = new double[dimensions];
+
+	for (int i = 0; i < dimensions; i++) {
+		temp[i] = 0;
+	}
+
+	for (int row = 0; row < dimensions; row++) {
+		for (int col = 0; col < dimensions; col++) {
+			temp[row] += (this->get_value(row, col) * r[col]);
+		}
+	}
+
+	return temp;
+
+}
+

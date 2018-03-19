@@ -51,6 +51,8 @@ public:
 	// identity
 	Matrix& identity();
 
+	double* multiplyMatrix(double *r);
+
 	
 
 private:
