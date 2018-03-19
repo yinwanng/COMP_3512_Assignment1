@@ -273,6 +273,12 @@ void swap(Matrix &first, Matrix &second)
 	swap(first.matrix, second.matrix);
 }
 
+Matrix operator*(Matrix lhs, const Matrix &rhs)
+{
+	lhs *= rhs;
+	return lhs;
+}
+
 // Adds the rhs matrix values to the lhs matrix .
 // Returns the lhs matrix.
 Matrix operator+(Matrix lhs, const Matrix &rhs)
@@ -292,6 +298,17 @@ Matrix operator-(Matrix lhs, const Matrix &rhs)
 Matrix & Matrix::operator=(Matrix other)
 {
 	swap(*this, other);
+	return *this;
+}
+
+Matrix & Matrix::operator*=(const Matrix & rhs)
+{
+	for (int row = 0; row < dimensions; row++) {
+		for (int col = 0; col < dimensions; col++) {
+			matrix[row * dimensions + col] = matrix[row * dimensions + col] * rhs.matrix[row * dimensions + col];
+
+		}
+	}
 	return *this;
 }
 
@@ -339,5 +356,4 @@ Matrix & Matrix::identity()
 	}
 	return *this;
 }
-
 

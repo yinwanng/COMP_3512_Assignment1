@@ -41,6 +41,8 @@ public:
 	Matrix& operator=(Matrix);
 
 	// binary arithmetic operators [+=, +, -+, -]
+	Matrix& operator*=(const Matrix&);
+	friend Matrix operator*(Matrix, const Matrix &);
 	Matrix& operator+=(const Matrix&);
 	friend Matrix operator+(Matrix, const Matrix &);
 	Matrix& operator-=(const Matrix &);
@@ -48,6 +50,9 @@ public:
 
 	// identity
 	Matrix& identity();
+
+	
+
 private:
 	double *matrix;
 	int dimensions;

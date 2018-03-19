@@ -10,13 +10,12 @@
 using namespace std;
 
 int main()
-{
-	
+{	
 	size_t inputStringLength = 0;
 	int dimension = 0;
 	vector<double> connectivityValues;
 
-	string filename = "connectivity.txt";
+	string filename = "connectivity4.txt";
 	ifstream input;
 	input.open(filename);
 
@@ -86,26 +85,31 @@ int main()
 
 	// create column matrix rank
 	double *matrixRank = new double[dimension];
+
 	for (int i = 0; i < dimension; i++) {
-		matrixRank[i] = 1;
+		matrixRank[i] = 1.0;
 	}
 
+	vector<double> rankScores;
+
 	// markov process
-	int index = 0;
 	double rank = 0;
+	int rankIndex = 0;
 	for (int row = 0; row < dimension; row++) {
 		for (int col = 0; col < dimension; col++) {
-			rank+= mMatrix.get_value(row, col) * matrixRank[index];
+			rank += (mMatrix.get_value(row, col) * matrixRank[rankIndex++]);
 		}
-
-		matrixRank[index++] = rank;
+		rankScores.push_back(rank);
+		rankIndex = 0;
 		rank = 0;
-	} 
+	}
+
+	// ---------------------------
 
 	// display check
 	cout << "Rank\n";
 	for (int i = 0; i < dimension; i++) {
-		cout << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << matrixRank[i] / dimension << endl;
+		cout << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << rankScores[i] / dimension << endl;
 	}
 
 
@@ -115,7 +119,7 @@ int main()
 	outFile.open(outputFileName);
 	if (outFile.is_open()) {
 		for (int i = 0; i < dimension; i++) {
-			outFile << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << matrixRank[i] / dimension << endl;
+			outFile << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << rankScores[i] / dimension << endl;
 		}
 		outFile.close();
 	}
