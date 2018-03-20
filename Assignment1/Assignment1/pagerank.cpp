@@ -9,6 +9,7 @@
 #define ASCII_OFFSET      65   
 using namespace std;
 
+// Check if rank are equal or not
 bool compareRank(double *first, double *second, int dimension);
 
 int main()
@@ -17,7 +18,8 @@ int main()
 	int dimension = 0;
 	vector<double> connectivityValues;
 
-	string filename = "connectivity8.txt";
+	// open file
+	string filename = "connectivity9.txt";
 	ifstream input;
 	input.open(filename);
 
@@ -26,6 +28,7 @@ int main()
 	}
 
 	cout << "Input file contents: \n";
+
 	// count to find Matrix diemsnion
 	while (input) {
 		string line;	
@@ -65,6 +68,7 @@ int main()
 	cout << cMatrix << endl;
 
 	Matrix sMatrix = cMatrix;
+
 	// set importance
 	sMatrix.set_importance();
 	cout << "S Matrix after importance\n" << sMatrix << endl;
@@ -104,7 +108,6 @@ int main()
 		cout << fixed << setprecision(3) << (char)(i + ASCII_OFFSET) << " = " << matrixRank[i] / dimension << endl;
 	}
 
-
 	// write to file
 	ofstream outFile;
 	string outputFileName = "Rank.txt";
@@ -123,6 +126,7 @@ int main()
 	return 0;
 }
 
+// Returns true if the ranks are equal and false if not
 bool compareRank(double *first, double *second, int dimension)
 {
 	for (int i = 0; i < dimension; i++) {

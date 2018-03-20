@@ -301,6 +301,7 @@ Matrix & Matrix::operator=(Matrix other)
 	return *this;
 }
 
+// Multiply Matrix
 Matrix & Matrix::operator*=(const Matrix & rhs)
 {
 	for (int row = 0; row < dimensions; row++) {
@@ -356,7 +357,7 @@ Matrix & Matrix::identity()
 	}
 	return *this;
 }
-
+// Multiplies the matrix
 double * Matrix::multiplyMatrix(double *r)
 {
 	double *temp = new double[dimensions];
@@ -370,8 +371,6 @@ double * Matrix::multiplyMatrix(double *r)
 			temp[row] += (this->get_value(row, col) * r[col]);
 		}
 	}
-
 	return temp;
-
 }
 

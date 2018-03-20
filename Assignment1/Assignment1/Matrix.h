@@ -36,7 +36,7 @@ public:
 	Matrix& operator--();   //prefix decrement
 	Matrix operator--(int); //postfix decrement
 
-							// assignment operator using the copy-and-swap algorithm
+	// assignment operator using the copy-and-swap algorithm
 	friend void swap(Matrix&, Matrix&);
 	Matrix& operator=(Matrix);
 
@@ -51,9 +51,8 @@ public:
 	// identity
 	Matrix& identity();
 
+	// multiply matrix
 	double* multiplyMatrix(double *r);
-
-	
 
 private:
 	double *matrix;
